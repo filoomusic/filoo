@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filoo Music – DJ Portfólió</title>
+    
+    <style>
+        :root {
+            --primary-bg: rgba(15, 15, 15, 0.85);
+            --accent-color: #fffc97;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url("diakbal.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url("diakball.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center top;
+            width: 100%;
+            aspect-ratio: 16 / 7; 
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; 
+            align-items: flex-end;    
+            text-align: right;        
+            position: relative;
+        }
+
+        .header-content {
+            padding: 0 4% 4% 0;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin: 0;
+        }
+
+        /* ===== NAVIGÁCIÓ ===== */
+        nav { 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: white;
+            color: black;
+        }
+
+        /* ===== SZEKCIÓK ===== */
+        section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 3rem;
+            background: var(--primary-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+        }
+
+        h2 { 
+            text-align: center; 
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 0;
+            margin-bottom: 2.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* ===== RÓLAM SZEKCIÓ JAVÍTÁS ===== */
+        .about-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+            flex-wrap: nowrap; /* Ez tartja egymás mellett a szöveget és a képet */
+        }
+
+        .bio-content {
+            flex: 1.5;
+            text-align: left;
+        }
+
+        .bio-content h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        .bio-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .profile-pic { 
+            flex: 1; 
+            max-width: 350px;
+            border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            object-fit: cover;
+        }
+
+        /* ===== TÁBLÁZAT ===== */
+        .table-container { overflow-x: auto; width: 100%; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        th, td { padding: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        th { color: var(--accent-color); text-transform: uppercase; font-size: 0.8rem; }
+
+        /* ===== GALÉRIA ===== */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { border-radius: 15px; overflow: hidden; background: #151515; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+        .gallery-item:hover { transform: translateY(-5px); border-color: #fff; }
+        .gallery-item img { width: 100%; height: 250px; object-fit: cover; cursor: pointer; }
+        .gallery-caption { padding: 10px; text-align: center; font-size: 0.85rem; color: #999; }
+
+        /* ===== VIDEO ===== */
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* ===== KAPCSOLAT ===== */
+        .contact-container { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .contact-link { width: 100%; max-width: 350px; padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid #333; color: white; text-decoration: none; border-radius: 15px; transition: 0.3s; text-align: center; font-weight: 600; }
+        .contact-link:hover { border-color: var(--accent-color); background: rgba(255,255,255,0.1); }
+
+        /* ===== MOBIL FINOMHANGOLÁS ===== */
+        @media (max-width: 850px) {
+            .about-container {
+                flex-direction: column-reverse; /* Kép felül, szöveg alul */
+                align-items: center;
+                text-align: center;
+            }
+            .bio-content { text-align: center; }
+            .profile-pic { max-width: 100%; width: 300px; }
+            section { width: 95%; padding: 2rem 1.5rem; }
+        }
+        
+        /* Lightbox (marad az eredeti) */
+        .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); justify-content: center; align-items: center; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 5px; }
+        .close-lightbox { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+        .nav-btn { position: absolute; top: 50%; color: white; font-size: 40px; cursor: pointer; padding: 20px; }
+        .prev-btn { left: 10px; } .next-btn { right: 10px; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>FILOO MUSIC</h1>
+            <p>"Erre egyetlen szóban tudjuk megadni a választ: <strong>KIMARADUNK!</strong>" - Orbán Viktor</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#rolam">Rólam</a></li>
+            <li><a href="#naptar">Naptár</a></li>
+            <li><a href="#galeria">Galéria</a></li>
+            <li><a href="#videok">Videó</a></li>
+            <li><a href="#kapcsolat">Kapcsolat</a></li>
+        </ul>
+    </nav>
+
+    <section id="rolam">
+        <h2>A FILOO MUSICRÓL</h2>
+        <div class="about-container">
+            <div class="bio-content">
+                <h3>Szia, FILOO MUSIC vagyok!</h3>
+                <p>
+                    Filotás Kristóf vagyok, de a legtöbben csak <strong>FILOO</strong>-ként ismertek a pult mögül. 
+                    Két éve kezdtem el komolyabban foglalkozni a DJ-zéssel és ennek világával, azóta pedig nincs megállás.
+                </p>
+                <p>Saját hang és fénytechnikával rendelkezem!</p>
+                <p>
+                    Már az indulásnál olyan élményekkel gazdagodtam, amikre nem is számítottam. 
+                    Hatalmas mérföldkő volt a székesfehérvári teltházas <strong>Diákbálon</strong> zenélni, 
+                    ahol közvetlenül <strong>DJ Regán Lili</strong> előtt mozgathattam meg a tömeget. 
+                    Emellett az <strong>Albabar</strong> és a <strong>LeBaron</strong> közönsége is mindig hatalmas energiát adott.
+                </p>
+
+                <p>
+                    Imádom a változatosságot: otthonosan mozgok a nagy clubokban, de szívesen vállalok utcabálokat, 
+                    suli-bulikat, falu discót vagy privát születésnapokat is. A célom egyszerű: 
+                    <em>felejthetetlen hangulatot teremteni és átadni a zene iránti szenvedélyemet.</em>
+                </p>
+            </div>
+            
+            <img src="portre.png.png.png" alt="Filoo Portré" class="profile-pic">
+        </div>
+    </section>
+
+    <section id="naptar">
+        <h2>2026-os fellépési naptár</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Időpont</th><th>Idő</th><th>Helyszín</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>2026 Január 17.</td><td>20:00–04:00</td><td>Zámoly Faluház - Szülinap</td></tr>
+                    <tr><td>2026 Január 31.</td><td>21:00–22:00</td><td>Székesfehérvár Stadion - Diákbál</td></tr>
+                    <tr><td>2026 Február 06.</td><td>15:00–18:00</td><td>Zámoly Iskola - Farsang</td></tr>
+                    <tr><td>2026 Február 21.</td><td>21:00–04:00</td><td>Csoóri Sándor Műv. Ház - Falu Disco</td></tr>
+                    <tr><td>2026 Február 27.</td><td>21:00–23:30</td><td>Székesfehérvár - Albabar</td></tr>
+                    <tr><td>2026 Március 07.</td><td>16:00–03:00</td><td>Lebaron Club - Szülinap</td></tr>
+                    <tr><td>2026 Április 01.</td><td>08:00–14:00</td><td>Székesfehérvár Jáky - Dök nap</td></tr>
+                    <tr><td>2026 Április 30.</td><td>20:00–22:00</td><td>Zámoly Májfa állítás - Utcabál</td></tr>
+                    <tr><td>2026 Május 9.</td><td>21:00–04:00</td><td>Zámoly Csoóri Sándor Műv. Ház - Falu Disco part.2 </td></tr>
+                    <tr><td>2026 Május 29.</td><td>18:00–22:00</td><td>Zámoly - Magtár Piknik</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="galeria">
+        <h2>2026-os Galéria</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="p1040373.jpg" alt="ALBABAR"><div class="gallery-caption">Székesfehérvár ALBABAR</div></div>
+            <div class="gallery-item"><img src="diakball.jpg" alt="Diákbál"><div class="gallery-caption">Városi Diákbál</div></div>
+            <div class="gallery-item"><img src="falu.png" alt="Falu Disco"><div class="gallery-caption">Zámoly Falu Disco</div></div>
+            <div class="gallery-item"><img src="suli.png" alt="jáky"><div class="gallery-caption">Székesfehérvár Jáky Dök nap</div></div>
+            <div class="gallery-item"><img src="lebaron.jpg" alt="lebaron"><div class="gallery-caption">Székesfehérvár Lebaron Club</div></div>
+            <div class="gallery-item"><img src="altisk.png" alt="altisk"><div class="gallery-caption">Zámoly általános iskola</div></div>
+            <div class="gallery-item"><img src="majfa.jpg" alt="utcabal"><div class="gallery-caption">Zámoly Utcabál</div></div>
+            <div class="gallery-item"><img src="magtar.jpg" alt="utcabal"><div class="gallery-caption">Zámoly Magtár Piknik</div></div>
+        </div>
+    </section>
+
+    <div id="lightbox" class="lightbox">
+        <span id="close" class="close-lightbox">&times;</span>
+        <span id="prev" class="nav-btn prev-btn">&#10094;</span>
+        <img id="lightbox-img" src="" alt="Nagyított kép">
+        <span id="next" class="nav-btn next-btn">&#10095;</span>
+    </div>
+
+    <section id="videok">
+        <h2>Aftermovie & Fellépések</h2>
+        <div class="video-wrapper">
+            <iframe 
+                src="https://drive.google.com/file/d/1OVKg7O63eFYOLncF7tXOCWb2zMGivEpG/preview" 
+                allow="autoplay">
+            </iframe>
+        </div>
+    </section>
+
+    <section id="kapcsolat">
+        <h2>Elérhetőségek</h2>
+        <div class="contact-container">
+            <a href="mailto:filotaskristof4@gmail.com" class="contact-link"><i class="fa-solid fa-envelope"></i> filotaskristof4@gmail.com</a>
+            <a href="https://www.instagram.com/filoo_official/" target="_blank" class="contact-link"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        </div>
+    </section>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const images = Array.from(document.querySelectorAll('.gallery-item img'));
+        let currentIndex = 0;
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentIndex = index;
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        document.getElementById('next').addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % images.length;
+            lightboxImg.src = images[currentIndex].src;
+        });
+
+        document.getElementById('prev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            lightboxImg.src = images[currentIndex].src;
+        });
+
+        document.getElementById('close').addEventListener('click', () => lightbox.classList.remove('active'));
+        
+        lightbox.addEventListener('click', (e) => { 
+            if(e.target === lightbox) lightbox.classList.remove('active'); 
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === "ArrowRight") document.getElementById('next').click();
+            if (e.key === "ArrowLeft") document.getElementById('prev').click();
+            if (e.key === "Escape") lightbox.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
